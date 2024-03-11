@@ -1,0 +1,37 @@
+# Rust
+# Compiled Files
+target/
+
+# Cargo.lock file
+Cargo.lock
+
+# Dependency directories
+# Add more if your project uses more directories for dependencies.
+# Example: /path/to/dependency/
+# /path/to/dependency/
+
+# Racer (Rust Language Server)
+.racer/
+
+# Rustfmt
+.rustfmt.toml
+
+# IDE/Editor specific files
+# For VSCode, Atom, and SublimeText, see https://github.com/github/gitignore for updated templates.
+.idea/
+.vscode/
+.sublime-project
+.sublime-workspace
+
+# Compiled dynamic libraries
+*.rlib
+*.so
+*.dylib
+*.dll
+
+# Generated files
+# Remove these when exporting your final project
+Cargo.lock
+Cargo.toml.orig
+*.swp
+*.swo

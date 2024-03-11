@@ -14,6 +14,7 @@ For the given blinded path, and channel graph
 
 ## Functions to implement
 
+- [x] Introduce functions to read the `blinded_path.json` and `channel_graph.json`
 - [ ] A function that takes complete `channel_graph`, `Intro node`, and `Max length of path (N)` as input, and outputs possible `channel route`s of N length.
     1. The `channel route` contains all the relevant information (1. fee_base_msat, 2. fee_proptional_millionth, 3. htlc_minimum_msat, 4. cltv_expiry_delta) in the direction payment forward.
 - [ ] Functions that for a given `channel route` find the cumulative:

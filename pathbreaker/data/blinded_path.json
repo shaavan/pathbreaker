@@ -1,0 +1,9 @@
+{
+    "introduction_node": "pubkey",
+    "blinded_nodes": ["pubkey1", "pubkey2"],
+    "fee_base_msat": 100,
+    "fee_proportional_millionths": 200,
+    "htlc_minimum_msat": 300,
+    "cltv_expiry_delta": 400,
+    "max_cltv_expiry": 500
+}

@@ -1,0 +1,9 @@
+{
+    "introduction_node": "027c8c6e28628a1f2260200dc0cfcec18536c099958d0d889a995b0158a616256a",
+    "blinded_nodes": ["024ca83549a8cdbf3b057313500d5a53d872078d5a8d69cb6adf74cb02237afa67", "02a04573e3ef170bbe8aa7a74db79c759bc956e182f0ab1d0e61653aba0a4643cd", "03d19a0d7b67b4c828afd8b11a80b7419ad3dd6de24b25e0bd452d4d3b5ae54654", "0317d64ea0a7fc304daa9cd37fd38289090528719ce0cffe2d0ecd690a0697ff70", "0229ad42aeb43269891c9703ad44cd8a4c11e5a3b81a87e5df8d525e73f9d4f880"],
+    "fee_base_msat": 10000,
+    "fee_proportional_millionths": 20000,
+    "htlc_minimum_msat": 1000,
+    "cltv_expiry_delta": 2000,
+    "max_cltv_expiry": 50000
+}

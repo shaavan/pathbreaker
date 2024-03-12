@@ -46,19 +46,19 @@ pub struct Edge {
     pub node1_pub: String,
     pub node2_pub: String,
     pub capacity: String,
-    pub node1_policy: Policy,
-    pub node2_policy: Policy,
+    pub node1_policy: NodePolicy,
+    pub node2_policy: NodePolicy,
     pub custom_records: serde_json::Value,
 }
-#[derive(Debug, Deserialize)]
-pub struct Policy {
-    pub time_lock_delta: i64,
+#[derive(Debug, Deserialize, Clone)]
+pub struct NodePolicy {
+    pub time_lock_delta: u32,
     pub min_htlc: String,
     pub fee_base_msat: String,
     pub fee_rate_milli_msat: String,
     pub disabled: bool,
     pub max_htlc_msat: String,
-    pub last_update: i64,
+    pub last_update: u64,
     pub custom_records: serde_json::Value,
 }
 
@@ -71,6 +71,7 @@ pub fn read_channel_graph_from_file(file_path: &str) -> Result<ChannelGraph, Box
     Ok(channel_graph)
 }
 
+#[allow(unused)]
 pub fn read_blinded_path_from_file(file_path: &str) -> Result<BlindedPath, Box<dyn Error>> {
     // Open the file in read-only mode
     let path = Path::new(file_path);

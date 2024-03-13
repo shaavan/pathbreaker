@@ -22,8 +22,8 @@ For the given blinded path, and channel graph
     - [x] `fee_propotional_millionth`
     - [x] `htlc_minimum_msat`
     - [x] `cltv_expiry_delta`
-- [ ] A function that takes a list of properties as input and creates an adjusted multivariate normal distribution graph for them.
-- [ ] A function that for a given `channel route` takes the expected cumulated properties as input, and calculated probability distribution factor for the value seen in reality (the original input values)
+- [x] A function that takes a list of properties as input and creates an adjusted multivariate normal distribution graph for them.
+- [x] A function that for a given `channel route` takes the expected cumulated properties as input, and calculated probability distribution factor for the value seen in reality (the original input values)
 - [ ] // _Other functions as needed_
 
 
@@ -37,3 +37,13 @@ Good Route: A good route is a non-circular route that adheres to Blinded Path co
 4. For each of these steps make sure, that the real values are not exceeded (from blinded_path).
 5. Save just the latest sets of queues that fulfil the real values to the closest.
 6. Return the queues.
+
+### Approach for Finding the Most Probable Receiver:
+
+Approach
+
+1. Standardise the route constraints to make make them of comparable range, and avoid probability skewing. This involves normalizing each constraint based on its mean and standard deviation.
+2. Create a multivariate normal distribution based on a vector of standardised constraints.
+3. Calculate the probability density function (PDF) of the multivariate normal distribution to determine the likelihood of the real constraints matching the expected constraints for each route.
+4. Calculate the probability a node being the receiver node for each route and aggregate them.
+5. Sort the receiver nodes based on their aggregated probabilities, with the most probable receiver appearing first in the sorted list.

@@ -5,9 +5,9 @@ use crate::utils::{BlindedPath, ChannelGraph, NodePolicy};
 /// A route is a list of channels with the latest node, and channel_id
 #[derive(Debug, Default, Clone)]
 pub struct Route {
-    nodes: Vec<String>, // A, B, C
-    channel_ids: Vec<String>, // Channel A-B, Channel B-C
-    constraints: Constraints,
+    pub nodes: Vec<String>, // A, B, C
+    pub channel_ids: Vec<String>, // Channel A-B, Channel B-C
+    pub constraints: Constraints,
 }
 
 impl Route {
@@ -27,11 +27,11 @@ impl Route {
 }
 
 #[derive(PartialEq, Eq, Clone, Copy, Debug)]
-struct Constraints {
-    path_length: u32,
-    fee_base_msat: u64,
-    htlc_minimum_msat: u64,
-    cltv_expiry_delta: u32,
+pub struct Constraints {
+    pub path_length: u32,
+    pub fee_base_msat: u64,
+    pub htlc_minimum_msat: u64,
+    pub cltv_expiry_delta: u32,
 }
 
 impl Default for Constraints {
@@ -80,12 +80,14 @@ impl Add for Constraints {
     }
 }
 
-fn get_constraints_from_blinded_path(blinded_path: &BlindedPath) -> Constraints {
-    Constraints {
-        path_length: blinded_path.blinded_nodes.len() as u32 + 1, // Including the introduction node
-        fee_base_msat: blinded_path.fee_base_msat,
-        htlc_minimum_msat: blinded_path.htlc_minimum_msat,
-        cltv_expiry_delta: blinded_path.cltv_expiry_delta,
+impl BlindedPath {
+    pub fn constraints(&self) -> Constraints {
+        Constraints {
+            path_length: self.blinded_nodes.len() as u32 + 1, // Including the introduction node
+            fee_base_msat: self.fee_base_msat,
+            htlc_minimum_msat: self.htlc_minimum_msat,
+            cltv_expiry_delta: self.cltv_expiry_delta,
+        }
     }
 }
 
@@ -155,7 +157,7 @@ fn get_good_routes(final_routes: &mut Vec<Route>, cur_route: &Route, channel_gra
 
 pub fn get_final_routes(channel_graph: &ChannelGraph, blinded_path: &BlindedPath) -> Vec<Route> {
     let intro_node = blinded_path.introduction_node.clone();
-    let real_constraints = get_constraints_from_blinded_path(blinded_path);
+    let real_constraints = blinded_path.constraints();
     let mut final_routes = Vec::new();
 
     let first_route = Route {
@@ -169,6 +171,7 @@ pub fn get_final_routes(channel_graph: &ChannelGraph, blinded_path: &BlindedPath
     final_routes
 }
 
+#[allow(unused)]
 pub fn find_end_points(routes: &Vec<Route>) -> Vec<(String, usize)> {
     let mut node_counts: HashMap<String, usize> = HashMap::new();
 
